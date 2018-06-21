@@ -22,4 +22,10 @@ class Api::EventsController < ApplicationController
 
     render :show
   end
+
+  private
+
+  def event_params
+    params.require(:event).permit(:description, :start_time, :end_time)
+  end
 end
