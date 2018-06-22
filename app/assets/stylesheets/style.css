@@ -42,7 +42,7 @@ td {
 }
 
 th,
-td:not(:last-child) {
+td {
   border-bottom: 1px solid black;
 }
 
