@@ -5,19 +5,15 @@ import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 
 import App from './components/App';
-// import reducers from './reducers';
-// import axios from 'axios';
+import RootReducer from './reducers/root_reducer';
 
-// const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+const store = createStore(RootReducer, {}, applyMiddleware(reduxThunk));
 
-/*ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.querySelector('#root')
-);
-
-*/
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(<App />, document.getElementById('root'));
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('root')
+  );
 });
