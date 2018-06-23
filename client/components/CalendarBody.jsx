@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DayCard from './DayCard';
 
 class CalendarBody extends Component {
   constructor(props) {
@@ -19,8 +20,7 @@ class CalendarBody extends Component {
         'December'
       ],
       days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      date: new Date(),
-      dateRendered: 1
+      date: new Date()
     };
   }
 
@@ -31,6 +31,7 @@ class CalendarBody extends Component {
   }
 
   renderFirstRow(startDay) {
+    let firstRow = [];
     let count = 1;
     let dates = [];
     for (let i = 0; i <= 6; i++) {
@@ -42,20 +43,69 @@ class CalendarBody extends Component {
       }
     }
 
-    this.setState({ dateRendered: count });
+    dates.forEach((date, index) => {
+      if (date) {
+        firstRow[index] = (
+          <td key={index}>
+            <DayCard date={date} />
+          </td>
+        );
+      } else {
+        firstRow[index] = <td key={index} />;
+      }
+    });
+
+    return firstRow;
+  }
+
+  renderFullWeek(startDay) {
+    let dates = [];
+    for (let i = 0; i <= 6; i++) {
+      dates[i] = startDay;
+      startDay++;
+    }
 
     return dates.map(date => {
-      return <td key={date}>{date}</td>;
+      return (
+        <td key={date}>
+          <DayCard date={date} />
+        </td>
+      );
+    });
+  }
+
+  renderLastRow(startDay, endDay) {
+    let dates = [];
+    for (let i = 0; i <= 6; i++) {
+      dates[i] = startDay;
+      startDay++;
+      if (startDay > endDay) {
+        break;
+      }
+    }
+
+    return dates.map(date => {
+      return (
+        <td key={date}>
+          <DayCard date={date} />
+        </td>
+      );
     });
   }
 
   render() {
-    let firstDayInMonth = `${
-      this.state.months[this.state.date.getMonth()]
-    } 1 ${this.state.date.getFullYear()}`;
+    const year = this.state.date.getFullYear();
+    const month = this.state.date.getMonth();
+    let firstDayInMonth = `${this.state.months[month]} 1 ${year}`;
     const dateString = new Date(firstDayInMonth).toDateString();
     const firstDay = dateString.substring(0, 3);
     const startDay = this.state.days.indexOf(firstDay);
+    const maxDays = new Date(year, month + 1, 0).getDate();
+    const startInSecondRow = 7 - startDay + 1;
+    const startInThirdRow = startInSecondRow + 7;
+    const startInFourthRow = startInThirdRow + 7;
+    const startInFifthRow = startInFourthRow + 7;
+    const startInSixthRow = startInFifthRow + 7;
 
     return (
       <div className="calendar-body">
@@ -63,15 +113,19 @@ class CalendarBody extends Component {
           <tbody>
             <tr>{this.getdays()}</tr>
             <tr>{this.renderFirstRow(startDay)}</tr>
-            <tr>
-              <td>Eve</td>
-              <td>Jackson</td>
-              <td>94</td>
-              <td>94</td>
-              <td>94</td>
-              <td>94</td>
-              <td>94</td>
-            </tr>
+            <tr>{this.renderFullWeek(startInSecondRow)}</tr>
+            <tr>{this.renderFullWeek(startInThirdRow)}</tr>
+            <tr>{this.renderFullWeek(startInFourthRow)}</tr>
+            {startInFifthRow < maxDays ? (
+              startInFifthRow + 6 > maxDays ? (
+                <tr>{this.renderLastRow(startInFifthRow, maxDays)}</tr>
+              ) : (
+                <tr>{this.renderFullWeek(startInFifthRow)}</tr>
+              )
+            ) : null}
+            {startInSixthRow <= maxDays ? (
+              <tr>{this.renderLastRow(startInSixthRow, maxDays)}</tr>
+            ) : null}
           </tbody>
         </table>
       </div>
