@@ -30,7 +30,7 @@ class CalendarBody extends Component {
     });
   }
 
-  renderFirstRow(startDay) {
+  renderFirstRow(startDay, month, year) {
     let firstRow = [];
     let count = 1;
     let dates = [];
@@ -47,7 +47,11 @@ class CalendarBody extends Component {
       if (date) {
         firstRow[index] = (
           <td key={index}>
-            <DayCard date={date} />
+            <DayCard
+              date={date > 9 ? date : `0${date}`}
+              month={month + 1 > 9 ? month + 1 : `0${month + 1}`}
+              year={year}
+            />
           </td>
         );
       } else {
@@ -58,7 +62,7 @@ class CalendarBody extends Component {
     return firstRow;
   }
 
-  renderFullWeek(startDay) {
+  renderFullWeek(startDay, month, year) {
     let dates = [];
     for (let i = 0; i <= 6; i++) {
       dates[i] = startDay;
@@ -68,13 +72,17 @@ class CalendarBody extends Component {
     return dates.map(date => {
       return (
         <td key={date}>
-          <DayCard date={date} />
+          <DayCard
+            date={date > 9 ? date : `0${date}`}
+            month={month + 1 > 9 ? month + 1 : `0${month + 1}`}
+            year={year}
+          />
         </td>
       );
     });
   }
 
-  renderLastRow(startDay, endDay) {
+  renderLastRow(startDay, endDay, month, year) {
     let dates = [];
     for (let i = 0; i <= 6; i++) {
       dates[i] = startDay;
@@ -87,7 +95,11 @@ class CalendarBody extends Component {
     return dates.map(date => {
       return (
         <td key={date}>
-          <DayCard date={date} />
+          <DayCard
+            date={date > 9 ? date : `0${date}`}
+            month={month + 1 > 9 ? month + 1 : `0${month + 1}`}
+            year={year}
+          />
         </td>
       );
     });
@@ -112,19 +124,23 @@ class CalendarBody extends Component {
         <table>
           <tbody>
             <tr>{this.getdays()}</tr>
-            <tr>{this.renderFirstRow(startDay)}</tr>
-            <tr>{this.renderFullWeek(startInSecondRow)}</tr>
-            <tr>{this.renderFullWeek(startInThirdRow)}</tr>
-            <tr>{this.renderFullWeek(startInFourthRow)}</tr>
+            <tr>{this.renderFirstRow(startDay, month, year)}</tr>
+            <tr>{this.renderFullWeek(startInSecondRow, month, year)}</tr>
+            <tr>{this.renderFullWeek(startInThirdRow, month, year)}</tr>
+            <tr>{this.renderFullWeek(startInFourthRow, month, year)}</tr>
             {startInFifthRow < maxDays ? (
               startInFifthRow + 6 > maxDays ? (
-                <tr>{this.renderLastRow(startInFifthRow, maxDays)}</tr>
+                <tr>
+                  {this.renderLastRow(startInFifthRow, maxDays, month, year)}
+                </tr>
               ) : (
-                <tr>{this.renderFullWeek(startInFifthRow)}</tr>
+                <tr>{this.renderFullWeek(startInFifthRow, month, year)}</tr>
               )
             ) : null}
             {startInSixthRow <= maxDays ? (
-              <tr>{this.renderLastRow(startInSixthRow, maxDays)}</tr>
+              <tr>
+                {this.renderLastRow(startInSixthRow, maxDays, month, year)}
+              </tr>
             ) : null}
           </tbody>
         </table>
