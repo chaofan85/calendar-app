@@ -6,19 +6,26 @@ class EventForm extends Component {
   constructor(props) {
     super(props);
 
+    let hour = new Date().getHours();
+    let startHour = hour + 1 >= 24 ? hour - 23 : hour;
+    let endHour = hour + 2 >= 24 ? hour - 22 : hour;
+
     this.state = {
       eventTitle: '',
-      startTime: `${this.props.year}-${this.props.month}-${
-        this.props.date
-      }T${new Date().getHours() + 1}:00`,
-      endTime: `${this.props.year}-${this.props.month}-${
-        this.props.date
-      }T${new Date().getHours() + 2}:00`
+
+      startTime: `${this.props.year}-${this.props.month}-${this.props.date}T${
+        startHour >= 10 ? '' : '0'
+      }${startHour}:00`,
+
+      endTime: `${this.props.year}-${this.props.month}-${this.props.date}T${
+        endHour >= 10 ? '' : '0'
+      }${endHour}:00`
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEventChange = this.handleEventChange.bind(this);
     this.handleStartTimeChange = this.handleStartTimeChange.bind(this);
+    this.handleEndTimeChange = this.handleEndTimeChange.bind(this);
   }
 
   handleEventChange(e) {
@@ -27,6 +34,10 @@ class EventForm extends Component {
 
   handleStartTimeChange(e) {
     this.setState({ startTime: e.target.value });
+  }
+
+  handleEndTimeChange(e) {
+    this.setState({ endTime: e.target.value });
   }
 
   handleSubmit(e) {
@@ -49,13 +60,19 @@ class EventForm extends Component {
           </div>
           <div>
             <input
+              className="start-time"
               type="datetime-local"
               defaultValue={this.state.startTime}
               onChange={this.handleStartTimeChange}
             />
           </div>
           <div>
-            <input type="datetime-local" defaultValue={this.state.endTime} />
+            <input
+              className="end-time"
+              type="datetime-local"
+              defaultValue={this.state.endTime}
+              onChange={this.handleEndTimeChange}
+            />
           </div>
 
           <input type="submit" />

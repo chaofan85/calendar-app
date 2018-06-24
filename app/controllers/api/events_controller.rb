@@ -1,4 +1,10 @@
 class Api::EventsController < ApplicationController
+  def index
+    @events = Event.find(:all)
+    p 'lalala', @events
+    render :index
+  end
+
   def create
     @event = Event.new(event_params)
     @event.start_time = @event.start_time.to_datetime
