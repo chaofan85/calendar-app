@@ -4,7 +4,7 @@ const EventsReducer = (state = [], action) => {
   switch (action.type) {
     case RECEIVE_EVENT:
       state.push(action.event);
-      break;
+      return state;
 
     default:
       return state;

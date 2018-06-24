@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addEvent } from '../actions/event_actions';
 
 class EventForm extends Component {
   constructor(props) {
@@ -25,13 +27,12 @@ class EventForm extends Component {
 
   handleStartTimeChange(e) {
     this.setState({ startTime: e.target.value });
-
-    console.log(this.state.startTime);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state.eventTitle);
+    const event = Object.assign({}, this.state);
+    this.props.addEvent(event);
   }
 
   render() {
@@ -64,4 +65,13 @@ class EventForm extends Component {
   }
 }
 
-export default EventForm;
+const mapDispatchToProps = dispatch => {
+  return {
+    addEvent: event => dispatch(addEvent(event))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(EventForm);
