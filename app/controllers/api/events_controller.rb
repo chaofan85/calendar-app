@@ -1,8 +1,6 @@
 class Api::EventsController < ApplicationController
   def index
-    @events = Event.find(:all)
-    p 'lalala', @events
-    render :index
+    @events = Event.all
   end
 
   def create

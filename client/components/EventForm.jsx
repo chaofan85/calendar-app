@@ -43,7 +43,9 @@ class EventForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const event = Object.assign({}, this.state);
-    this.props.addEvent(event);
+    this.props.addEvent(event).then(e => {
+      this.props.clickOutsideToClose(e);
+    });
   }
 
   render() {

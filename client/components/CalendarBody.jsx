@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import DayCard from './DayCard';
+import { getAllEvents } from '../actions/event_actions';
 
 class CalendarBody extends Component {
   constructor(props) {
@@ -105,6 +107,10 @@ class CalendarBody extends Component {
     });
   }
 
+  componentDidMount() {
+    this.props.getAllEvents();
+  }
+
   render() {
     const year = this.state.date.getFullYear();
     const month = this.state.date.getMonth();
@@ -149,4 +155,13 @@ class CalendarBody extends Component {
   }
 }
 
-export default CalendarBody;
+const mapDispatchToProps = dispatch => {
+  return {
+    getAllEvents: event => dispatch(getAllEvents())
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(CalendarBody);

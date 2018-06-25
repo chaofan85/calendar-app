@@ -7,3 +7,7 @@ export const addEvent = ({ eventTitle, startTime, endTime }) => {
     end_time: endTime
   });
 };
+
+export const getAllEvents = () => {
+  return axios.get('/api/events');
+};

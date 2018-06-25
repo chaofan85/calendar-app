@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import EventForm from './EventForm';
+import EventItem from './EventItem';
 
 class DayCard extends Component {
   constructor(props) {
@@ -33,7 +35,20 @@ class DayCard extends Component {
     this.renderForm();
   }
 
+  getEvents() {
+    let events = [];
+    const date = `${this.props.year}-${this.props.month}-${this.props.date}`;
+
+    for (let id in this.props.events) {
+      if (this.props.events[id].date === date) {
+        events.push(this.props.events[id]);
+      }
+    }
+    return events.map(event => <EventItem key={event.id} event={event} />);
+  }
+
   render() {
+    this.getEvents();
     return (
       <div
         className="day-card"
@@ -49,11 +64,22 @@ class DayCard extends Component {
             date={this.props.date}
             month={this.props.month}
             year={this.props.year}
+            clickOutsideToClose={this.clickOutsideToClose}
           />
         ) : null}
+        {this.props.events ? this.getEvents() : null}
       </div>
     );
   }
 }
 
-export default DayCard;
+const mapStateToProps = state => {
+  return {
+    events: state.events
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(DayCard);
