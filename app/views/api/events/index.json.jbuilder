@@ -4,8 +4,8 @@ json.events do
       json.id event.id
       json.eventTitle event.description
       json.date event.date
-      json.startTime event.start_time
-      json.endTime event.end_time
+      json.startTime event.start
+      json.endTime event.end
     end
   end
 end

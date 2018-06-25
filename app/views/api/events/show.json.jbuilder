@@ -3,7 +3,7 @@ json.event do
     json.id @event.id
     json.description @event.description
     json.date @event.date
-    json.startTime @event.start_time
-    json.endTime @event.end_time
+    json.startTime @event.start
+    json.endTime @event.end
   end
 end
