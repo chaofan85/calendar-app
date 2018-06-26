@@ -15,7 +15,7 @@ class EventItem extends Component {
   }
 
   renderForm(e) {
-    this.props.clickOutsideToClose(e);
+    // this.props.clickOutsideToClose(e);
     if (!this.state.showForm) {
       document.addEventListener('click', this.clickOutsideToCloseEdit, false);
     } else {
@@ -40,18 +40,15 @@ class EventItem extends Component {
   }
 
   render() {
-    const event = this.props.event;
     return (
       <div
         className="event-item"
-        onDoubleClick={this.renderForm}
-        onClick={this.props.clickOutsideToClose}
         ref={node => {
           this.node = node;
         }}
       >
-        <p>
-          {`${event.eventTitle}`} <span>{`${event.startTime}`}</span>
+        <p onDoubleClick={this.renderForm}>
+          {`${this.props.eventTitle}`} <span>{`${this.props.startTime}`}</span>
         </p>
 
         {this.state.showForm && (

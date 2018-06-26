@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addEvent } from '../actions/event_actions';
+import { updateEvent } from '../actions/event_actions';
 
 class EditForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      id: props.event.id,
       eventTitle: props.event.eventTitle.substring(0),
       startTime: props.event.startDateTime.substring(0, 19),
       endTime: props.event.endDateTime.substring(0, 19)
@@ -33,10 +34,14 @@ class EditForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    console.log('lololo');
+    const event = Object.assign({}, this.state);
+    this.props.updateEvent(event).then(evt => {
+      this.props.clickOutsideToCloseEdit(evt);
+    });
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className="event-form">
         <form onSubmit={this.handleSubmit}>
@@ -75,7 +80,7 @@ class EditForm extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addEvent: event => dispatch(addEvent(event))
+    updateEvent: event => dispatch(updateEvent(event))
   };
 };
 

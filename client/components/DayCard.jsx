@@ -48,6 +48,8 @@ class DayCard extends Component {
       <EventItem
         key={event.id}
         event={event}
+        eventTitle={event.eventTitle}
+        startTime={event.startTime}
         clickOutsideToClose={this.clickOutsideToClose}
       />
     ));
@@ -74,7 +76,7 @@ class DayCard extends Component {
         <ul className="event-list1">
           {this.props.events ? this.getEvents() : null}
         </ul>
-        <div className="add-area" onClick={this.renderForm} />
+        <div className="add-area" onDoubleClick={this.renderForm} />
       </div>
     );
   }

@@ -2,6 +2,7 @@ import * as EventAPIUtil from '../util/event_api_util';
 
 export const RECEIVE_EVENT = 'RECEIVE_EVENT';
 export const RECEIVE_EVENTS = 'RECEIVE_EVENTS';
+export const UPDATE_EVENT = 'UPDATE_EVENT';
 
 const receiveEvent = ({ data }) => {
   return {
@@ -13,9 +14,16 @@ const receiveEvent = ({ data }) => {
 const receiveEvents = ({ data }) => {
   return {
     type: RECEIVE_EVENTS,
-    event: data.events
+    events: data.events
   };
 };
+
+// const updateEvent = ({ data }) => {
+//   return {
+//     type: UPDATE_EVENT,
+//     event: data.event
+//   };
+// };
 
 export const addEvent = (eventTitle, start, end) => dispatch => {
   return EventAPIUtil.addEvent(eventTitle, start, end).then(payload =>
@@ -26,5 +34,11 @@ export const addEvent = (eventTitle, start, end) => dispatch => {
 export const getAllEvents = () => dispatch => {
   return EventAPIUtil.getAllEvents().then(payload =>
     dispatch(receiveEvents(payload))
+  );
+};
+
+export const updateEvent = (id, eventTitle, start, end) => dispatch => {
+  return EventAPIUtil.updateEvent(id, eventTitle, start, end).then(payload =>
+    dispatch(receiveEvent(payload))
   );
 };
