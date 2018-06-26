@@ -44,7 +44,13 @@ class DayCard extends Component {
         events.push(this.props.events[id]);
       }
     }
-    return events.map(event => <EventItem key={event.id} event={event} />);
+    return events.map(event => (
+      <EventItem
+        key={event.id}
+        event={event}
+        clickOutsideToClose={this.clickOutsideToClose}
+      />
+    ));
   }
 
   render() {
@@ -52,22 +58,23 @@ class DayCard extends Component {
     return (
       <div
         className="day-card"
-        onDoubleClick={this.renderForm}
         ref={node => {
           this.node = node;
         }}
       >
         <div>{this.props.date}</div>
-        <div>double click to add event</div>
-        {this.state.showForm ? (
+        {this.state.showForm && (
           <EventForm
             date={this.props.date}
             month={this.props.month}
             year={this.props.year}
             clickOutsideToClose={this.clickOutsideToClose}
           />
-        ) : null}
-        {this.props.events ? this.getEvents() : null}
+        )}
+        <ul className="event-list1">
+          {this.props.events ? this.getEvents() : null}
+        </ul>
+        <div className="add-area" onClick={this.renderForm} />
       </div>
     );
   }

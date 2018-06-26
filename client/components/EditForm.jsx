@@ -2,24 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addEvent } from '../actions/event_actions';
 
-class EventForm extends Component {
+class EditForm extends Component {
   constructor(props) {
     super(props);
 
-    let hour = new Date().getHours();
-    let startHour = hour + 1 >= 24 ? hour - 23 : hour + 1;
-    let endHour = hour + 2 >= 24 ? hour - 22 : hour + 2;
-
     this.state = {
-      eventTitle: '',
-
-      startTime: `${this.props.year}-${this.props.month}-${this.props.date}T${
-        startHour >= 10 ? '' : '0'
-      }${startHour}:00`,
-
-      endTime: `${this.props.year}-${this.props.month}-${this.props.date}T${
-        endHour >= 10 ? '' : '0'
-      }${endHour}:00`
+      eventTitle: props.event.eventTitle.substring(0),
+      startTime: props.event.startDateTime.substring(0, 19),
+      endTime: props.event.endDateTime.substring(0, 19)
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,10 +33,7 @@ class EventForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const event = Object.assign({}, this.state);
-    this.props.addEvent(event).then(evt => {
-      this.props.clickOutsideToClose(evt);
-    });
+    console.log('lololo');
   }
 
   render() {
@@ -56,7 +43,8 @@ class EventForm extends Component {
           <div>
             <input
               type="text"
-              placeholder="Add New Event"
+              placeholder="Edit Event"
+              defaultValue={this.state.eventTitle}
               onChange={this.handleEventChange}
               autoFocus
             />
@@ -78,7 +66,7 @@ class EventForm extends Component {
             />
           </div>
 
-          <input type="submit" value="Add" />
+          <input type="submit" value={this.props.edit ? 'Update' : 'Add'} />
         </form>
       </div>
     );
@@ -94,4 +82,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   null,
   mapDispatchToProps
-)(EventForm);
+)(EditForm);

@@ -1,9 +1,11 @@
 json.event do
   json.set! @event.id do
     json.id @event.id
-    json.description @event.description
+    json.eventTitle @event.description
     json.date @event.date
     json.startTime @event.start
     json.endTime @event.end
+    json.startDateTime @event.start_time
+    json.endDateTime @event.end_time
   end
 end
