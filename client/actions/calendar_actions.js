@@ -7,6 +7,6 @@ const switchMonth = ({ year, month }) => {
   };
 };
 
-export const changeMonth = (year, month) => dispatch => {
+export const changeMonth = ({ year, month }) => dispatch => {
   return dispatch(switchMonth({ year, month }));
 };

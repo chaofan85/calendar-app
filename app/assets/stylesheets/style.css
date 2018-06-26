@@ -28,6 +28,10 @@ body {
   border-bottom: 1px solid black;
 }
 
+.calendar-header div {
+  display: inline-block;
+}
+
 table,
 tr {
   width: 100%;

@@ -4,7 +4,7 @@ import CalendarReducer from './calendar_reducer';
 
 const RootReducer = combineReducers({
   events: EventsReducer,
-  currentMonth: CalendarReducer
+  calendar: CalendarReducer
 });
 
 export default RootReducer;

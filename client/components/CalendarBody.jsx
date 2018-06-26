@@ -112,8 +112,12 @@ class CalendarBody extends Component {
   }
 
   render() {
-    const year = this.state.date.getFullYear();
-    const month = this.state.date.getMonth();
+    const year = this.props.renderedYear
+      ? this.props.renderedYear
+      : this.state.date.getFullYear();
+    const month = this.props.renderedMonth
+      ? this.props.renderedMonth
+      : this.state.date.getMonth();
     let firstDayInMonth = `${this.state.months[month]} 1 ${year}`;
     const dateString = new Date(firstDayInMonth).toDateString();
     const firstDay = dateString.substring(0, 3);
@@ -155,6 +159,13 @@ class CalendarBody extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    renderedYear: state.calendar.year,
+    renderedMonth: state.calendar.month
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     getAllEvents: event => dispatch(getAllEvents())
@@ -162,6 +173,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(CalendarBody);
