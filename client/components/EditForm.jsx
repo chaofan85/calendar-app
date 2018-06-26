@@ -40,6 +40,8 @@ class EditForm extends Component {
     });
   }
 
+  deleteEvent() {}
+
   render() {
     return (
       <div className="event-form">
@@ -71,6 +73,9 @@ class EditForm extends Component {
           </div>
 
           <input type="submit" value={this.props.edit ? 'Update' : 'Add'} />
+          <div class="delete-event" onClick={this.deleteEvent}>
+            DELETE
+          </div>
         </form>
       </div>
     );

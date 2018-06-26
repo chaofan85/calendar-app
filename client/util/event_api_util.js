@@ -19,3 +19,7 @@ export const updateEvent = ({ id, eventTitle, startTime, endTime }) => {
 export const getAllEvents = () => {
   return axios.get('/api/events');
 };
+
+export const deleteEvent = id => {
+  return axios.delete(`/api/events/${id}`);
+};
