@@ -18,13 +18,6 @@ const receiveEvents = ({ data }) => {
   };
 };
 
-// const updateEvent = ({ data }) => {
-//   return {
-//     type: UPDATE_EVENT,
-//     event: data.event
-//   };
-// };
-
 export const addEvent = (eventTitle, start, end) => dispatch => {
   return EventAPIUtil.addEvent(eventTitle, start, end).then(payload =>
     dispatch(receiveEvent(payload))
