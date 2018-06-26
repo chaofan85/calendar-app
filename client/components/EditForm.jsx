@@ -41,7 +41,6 @@ class EditForm extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="event-form">
         <form onSubmit={this.handleSubmit}>

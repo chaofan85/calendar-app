@@ -32,6 +32,11 @@ body {
   display: inline-block;
 }
 
+.prev-month,
+.next-month {
+  cursor: pointer;
+}
+
 table,
 tr {
   width: 100%;

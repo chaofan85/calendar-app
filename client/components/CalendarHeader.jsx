@@ -24,52 +24,43 @@ class CalendarHeader extends Component {
       date: new Date()
     };
 
-    console.log(this.props);
     this.getPrevMonth = this.getPrevMonth.bind(this);
     this.getNextMonth = this.getNextMonth.bind(this);
   }
 
   componentDidMount() {}
 
+  getRenderedDate() {
+    const newDate = new Date();
+    const renderedDateString = `${
+      this.state.months[this.props.renderedMonth]
+    } 1 ${this.props.renderedYear}`;
+    return this.props.renderedYear ? new Date(renderedDateString) : newDate;
+  }
   getPrevMonth() {
-    let data;
+    const date = this.getRenderedDate();
     const year =
-      this.state.date.getMonth() > 0
-        ? this.state.date.getFullYear()
-        : this.state.date.getFullYear() - 1;
-    const month =
-      this.state.date.getMonth() > 0 ? this.state.date.getMonth() - 1 : 11;
-    data = { year, month };
+      date.getMonth() > 0 ? date.getFullYear() : date.getFullYear() - 1;
+    const month = date.getMonth() > 0 ? date.getMonth() - 1 : 11;
+    let data = { year, month };
     this.props.changeMonth(data);
   }
 
   getNextMonth() {
-    let data;
+    const date = this.getRenderedDate();
     const year =
-      this.state.date.getMonth() === 11
-        ? this.state.date.getFullYear() + 1
-        : this.state.date.getFullYear();
-    const month =
-      this.state.date.getMonth() === 11 ? 0 : this.state.date.getMonth() + 1;
-    data = { year, month };
+      date.getMonth() === 11 ? date.getFullYear() + 1 : date.getFullYear();
+    const month = date.getMonth() === 11 ? 0 : date.getMonth() + 1;
+    let data = { year, month };
     this.props.changeMonth(data);
   }
 
   render() {
-    const newDate = new Date();
-    console.log(this.props);
-    const renderedDateString = `${
-      this.state.months[this.props.renderedMonth]
-    } 1 ${this.props.renderedYear}`;
-    let renderedDate = this.props.renderedYear
-      ? new Date(renderedDateString)
-      : newDate;
-
-    console.log(renderedDateString, 'lalala', renderedDate);
+    const renderedDate = this.getRenderedDate();
     return (
       <div className="calendar-header">
         <div className="prev-month" onClick={this.getPrevMonth}>
-          lalala
+          &#9664;
         </div>
         <div className="current-month">
           {renderedDate.getFullYear() +
@@ -77,7 +68,7 @@ class CalendarHeader extends Component {
             this.state.months[renderedDate.getMonth()]}
         </div>
         <div className="next-month" onClick={this.getNextMonth}>
-          lololo
+          &#9654;
         </div>
       </div>
     );
