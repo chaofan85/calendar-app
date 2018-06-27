@@ -46,10 +46,10 @@ class EventItem extends Component {
           this.node = node;
         }}
       >
-        <p onDoubleClick={this.renderForm}>
+        <div className="event-content" onDoubleClick={this.renderForm}>
           <span className="event-title">{`${this.props.eventTitle}`}</span>
           <span className="event-date">{`${this.props.startTime}`}</span>
-        </p>
+        </div>
 
         {this.state.showForm && (
           <EditForm

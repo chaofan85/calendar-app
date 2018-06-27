@@ -17,8 +17,7 @@ body {
 }
 
 .container {
-  width: 100%;
-  /* height: 150vh; */
+  width: 119rem;
 }
 
 .calendar-header {
@@ -48,7 +47,7 @@ tr {
 
 th,
 td {
-  width: 14.285714285%;
+  width: 17rem;
   font-size: 1.4rem;
 }
 
@@ -64,9 +63,7 @@ td {
   width: 100%;
   height: 100%;
   padding: 5px;
-  /* border: 1px solid black; */
   background-color: #eee;
-
   position: relative;
   font-size: 1.4rem;
   transition: all 0.2s;
@@ -78,6 +75,12 @@ td {
   z-index: 10;
 }
 
+.day-card:hover .add-area::before {
+  content: 'Double Click Here To Add New Event';
+  color: #999;
+  font-size: 1.2rem;
+}
+
 .date {
   font-size: 2rem;
   text-align: right;
@@ -85,24 +88,34 @@ td {
 }
 
 .event-title {
-  width: 60%;
-  display: inline-block;
-  overflow-x: hidden;
+  width: 7rem;
+  white-space: nowrap;
+  overflow: hidden;
   float: left;
 }
 
 .event-date {
-  width: 40%;
+  width: 7rem;
   display: inline-block;
   overflow-x: hidden;
   float: right;
 }
 
-.event-item {
-  position: relative;
+.event-list {
+  max-height: 10rem;
+  overflow-y: scroll;
+  border-top: 1px solid grey;
 }
 
-.event-item p {
+.event-item {
+  width: 100%;
+  margin-bottom: 1rem;
+  display: inline-block;
+  height: auto;
+}
+
+.event-content {
+  position: relative;
 }
 
 .event-item:hover {
@@ -111,7 +124,11 @@ td {
 
 .add-area {
   width: 100%;
-  height: 100%;
+  height: 5rem;
+  padding: 5px;
+  border-top: 1px solid grey;
+  margin-top: 3px;
+  transition: all 0.3s;
 }
 
 .event-form,
