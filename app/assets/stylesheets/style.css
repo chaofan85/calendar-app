@@ -105,6 +105,7 @@ td {
   max-height: 10rem;
   overflow-y: scroll;
   border-top: 1px solid grey;
+  padding-top: 5px;
 }
 
 .event-item {
@@ -137,7 +138,7 @@ td {
   height: 15rem;
   font-size: 1.4rem;
   background-color: white;
-  padding: 1rem;
+  padding: 1rem 2rem;
   position: absolute;
   top: 0;
   right: -25rem;
@@ -166,4 +167,8 @@ input[type='text'] {
   display: inline-block;
   float: right;
   cursor: pointer;
+}
+
+.delete-event:hover {
+  background-color: #e8423a;
 }
