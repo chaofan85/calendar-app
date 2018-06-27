@@ -1,24 +1,15 @@
-# README
+# Calendar-App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Heroku Deploy: https://calendar-app-by-cf.herokuapp.com/
 
-Things you may want to cover:
+This is a full stack project, a calendar app that allows users to create, edit and delete events
 
-* Ruby version
+```
+Technology:
 
-* System dependencies
+Backend: Ruby on Rails
 
-* Configuration
+Frontend: React and Redux
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Database: PostgreSQL
+```
