@@ -15,7 +15,6 @@ class EventItem extends Component {
   }
 
   renderForm(e) {
-    // this.props.clickOutsideToClose(e);
     if (!this.state.showForm) {
       document.addEventListener('click', this.clickOutsideToCloseEdit, false);
     } else {
@@ -32,7 +31,7 @@ class EventItem extends Component {
   }
 
   clickOutsideToCloseEdit(e) {
-    if (this.node.contains(e.target)) {
+    if (!this.node || this.node.contains(e.target)) {
       return;
     }
 
@@ -48,7 +47,8 @@ class EventItem extends Component {
         }}
       >
         <p onDoubleClick={this.renderForm}>
-          {`${this.props.eventTitle}`} <span>{`${this.props.startTime}`}</span>
+          <span className="event-title">{`${this.props.eventTitle}`}</span>
+          <span className="event-date">{`${this.props.startTime}`}</span>
         </p>
 
         {this.state.showForm && (

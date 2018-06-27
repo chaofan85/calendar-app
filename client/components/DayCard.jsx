@@ -64,7 +64,7 @@ class DayCard extends Component {
           this.node = node;
         }}
       >
-        <div>{this.props.date}</div>
+        <div className="date">{this.props.date}</div>
         {this.state.showForm && (
           <EventForm
             date={this.props.date}
@@ -73,7 +73,7 @@ class DayCard extends Component {
             clickOutsideToClose={this.clickOutsideToClose}
           />
         )}
-        <ul className="event-list1">
+        <ul className="event-list">
           {this.props.events ? this.getEvents() : null}
         </ul>
         <div className="add-area" onDoubleClick={this.renderForm} />

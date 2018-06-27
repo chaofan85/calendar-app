@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateEvent } from '../actions/event_actions';
+import { updateEvent, deleteEvent } from '../actions/event_actions';
 
 class EditForm extends Component {
   constructor(props) {
@@ -17,6 +17,7 @@ class EditForm extends Component {
     this.handleEventChange = this.handleEventChange.bind(this);
     this.handleStartTimeChange = this.handleStartTimeChange.bind(this);
     this.handleEndTimeChange = this.handleEndTimeChange.bind(this);
+    this.deleteEvent = this.deleteEvent.bind(this);
   }
 
   handleEventChange(e) {
@@ -40,11 +41,15 @@ class EditForm extends Component {
     });
   }
 
-  deleteEvent() {}
+  deleteEvent() {
+    this.props.deleteEvent(this.props.event.id).then(evt => {
+      this.props.clickOutsideToCloseEdit(evt);
+    });
+  }
 
   render() {
     return (
-      <div className="event-form">
+      <div className="edit-form">
         <form onSubmit={this.handleSubmit}>
           <div>
             <input
@@ -73,7 +78,7 @@ class EditForm extends Component {
           </div>
 
           <input type="submit" value={this.props.edit ? 'Update' : 'Add'} />
-          <div class="delete-event" onClick={this.deleteEvent}>
+          <div className="delete-event" onClick={this.deleteEvent}>
             DELETE
           </div>
         </form>
@@ -84,7 +89,8 @@ class EditForm extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateEvent: event => dispatch(updateEvent(event))
+    updateEvent: event => dispatch(updateEvent(event)),
+    deleteEvent: id => dispatch(deleteEvent(id))
   };
 };
 
