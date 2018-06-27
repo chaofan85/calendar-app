@@ -76,9 +76,10 @@ td {
 }
 
 .day-card:hover .add-area::before {
-  content: 'Double Click Here To Add New Event';
+  content: 'Double Click to add new event or edit existing event';
   color: #999;
   font-size: 1.2rem;
+  text-transform: capitalize;
 }
 
 .date {
@@ -117,6 +118,7 @@ td {
 
 .event-content {
   position: relative;
+  text-transform: capitalize;
 }
 
 .event-item:hover {
@@ -157,6 +159,10 @@ td {
 input[type='text'] {
   border: none;
   border-bottom: 1px solid grey;
+}
+
+input[type='submit'] {
+  cursor: pointer;
 }
 
 .delete-event {
