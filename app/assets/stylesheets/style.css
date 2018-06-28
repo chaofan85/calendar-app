@@ -76,10 +76,16 @@ td {
 }
 
 .day-card:hover .add-area::before {
-  content: 'Double Click to add new event or edit existing event';
+  content: 'Double Click to add event or edit existing event';
   color: #999;
   font-size: 1.2rem;
   text-transform: capitalize;
+}
+
+.day-card:hover .add-area {
+  border: 1px;
+  border-style: dashed;
+  border-color: grey;
 }
 
 .date {
@@ -131,6 +137,7 @@ td {
   height: 5rem;
   padding: 5px;
   border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
   margin-top: 3px;
   cursor: pointer;
   transition: all 0.3s;
