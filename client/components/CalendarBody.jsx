@@ -112,12 +112,14 @@ class CalendarBody extends Component {
   }
 
   render() {
-    const year = this.props.renderedYear
-      ? this.props.renderedYear
-      : this.state.date.getFullYear();
-    const month = this.props.renderedMonth
-      ? this.props.renderedMonth
-      : this.state.date.getMonth();
+    const year =
+      this.props.renderedYear !== undefined
+        ? this.props.renderedYear
+        : this.state.date.getFullYear();
+    const month =
+      this.props.renderedMonth !== undefined
+        ? this.props.renderedMonth
+        : this.state.date.getMonth();
     let firstDayInMonth = `${this.state.months[month]} 1 ${year}`;
     const dateString = new Date(firstDayInMonth).toDateString();
     const firstDay = dateString.substring(0, 3);
