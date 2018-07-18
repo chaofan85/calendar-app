@@ -37,6 +37,7 @@ class CalendarHeader extends Component {
     } 1 ${this.props.renderedYear}`;
     return this.props.renderedYear ? new Date(renderedDateString) : newDate;
   }
+
   getPrevMonth() {
     const date = this.getRenderedDate();
     const year =
