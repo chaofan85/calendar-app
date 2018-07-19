@@ -5,7 +5,6 @@ import { changeMonth } from '../actions/calendar_actions';
 class CalendarHeader extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       months: [
         'January',
